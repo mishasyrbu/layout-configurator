@@ -1,5 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import LayoutsList from './containers/LayoutsList';
+import LayoutEditor from './containers/LayoutEditor';
 import './App.css';
 
 function App() {
@@ -11,13 +14,13 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-          {() => (<div>Layouts</div>)}
+            <LayoutsList />
           </Route>
           <Route path="/edit">
-            {() => (<div>Configurator</div>)}
+            <LayoutEditor />
           </Route>
           <Route>
-          {() => (<div>Page not found :(</div>)}
+            {() => (<div>Page not found :(</div>)}
           </Route>
         </Switch>
       </Router>
