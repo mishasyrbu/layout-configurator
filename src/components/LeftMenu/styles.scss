@@ -1,0 +1,19 @@
+.left-menu {
+    height: 100%;
+    width: 300px;
+    border-right: 1px solid black;
+
+    > .title {
+        border-bottom: 1px solid black;
+        margin: 20px;
+        padding: 16px 0;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    > .content {
+        display: flex;
+        flex-direction: column;
+        margin: 0 20px 20px;
+    }
+}
