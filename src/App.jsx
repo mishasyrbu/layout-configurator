@@ -5,13 +5,11 @@ import { Provider } from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 
 import LayoutsList from './containers/LayoutsList';
 import LayoutEditor from './containers/LayoutEditor';
 import store from './createStore';
-import './App.css';
+import './App.scss';
 
 function App() {
   return (
@@ -19,11 +17,8 @@ function App() {
       <Router>
         <AppBar position="static">
           <Toolbar>
-            <IconButton edge="start" color="inherit" aria-label="menu">
-              <MenuIcon />
-            </IconButton>
             <Typography variant="h6">
-              <Link to="/">Home</Link>
+              <Link className="app-header-link" to="/">Home</Link>
             </Typography>
           </Toolbar>
         </AppBar>

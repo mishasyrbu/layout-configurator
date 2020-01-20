@@ -16,6 +16,14 @@
         grid-gap: 10px;
         margin: 20px 40px 40px 40px;
 
+        @media (max-width: 720px) {
+            grid-template-columns: auto auto;
+        }
+
+        @media (max-width: 480px) {
+            grid-template-columns: auto;
+        }
+
         > .layout {
             height: 240px;
             border: 1px solid black;
