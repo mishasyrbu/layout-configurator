@@ -1,0 +1,31 @@
+.layouts-list {
+    display: flex;
+    flex-direction: column;
+
+    > .title {
+        border-bottom: 1px solid black;
+        margin: 20px;
+        padding: 16px 0;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    > .content {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-gap: 10px;
+        margin: 20px 40px 40px 40px;
+
+        > .layout {
+            height: 240px;
+            border: 1px solid black;
+            padding: 6px;
+            font-size: 150%;
+
+            .add-icon {
+                width: 30px;
+                height: 30px;
+            }
+        }
+    }
+}
