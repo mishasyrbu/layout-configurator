@@ -40,7 +40,8 @@
     ]
   },
   "devDependencies": {
-    "prop-types": "^15.7.2",
-    "classnames": "^2.2.6"
+    "classnames": "^2.2.6",
+    "gh-pages": "^2.2.0",
+    "prop-types": "^15.7.2"
   }
 }
