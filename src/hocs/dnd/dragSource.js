@@ -1,25 +1,23 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 export function dragSource(WrappedComponent) {
 
     return class extends React.Component {
-        static propTypes = {
-            id: PropTypes.oneOfType([
-                PropTypes.string,
-                PropTypes.number,
-              ]),
-        };
+        constructor(props) {
+            super(props);
 
-        drag(ev) {
-            ev.dataTransfer.setData("text", ev.target.id);
+            this.handleDragStartEvent = this.handleDragStartEvent.bind(this);
+        }
+
+        handleDragStartEvent(event) {
+            event.dataTransfer.setData('id', event.target.id);
         }
   
         render() {
             return (
                 <WrappedComponent
                     draggable
-                    onDragStart={this.drag}
+                    onDragStart={this.handleDragStartEvent}
                     {...this.props}
                 />
             );
