@@ -4,4 +4,8 @@
     flex: 1;
     margin: 20px 20px 0 20px;
     overflow: auto;
+
+    &.narrow-view {
+        zoom: .5;
+    }
 }

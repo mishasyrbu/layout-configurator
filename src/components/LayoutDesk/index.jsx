@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import LayoutShards from '../../components/LayoutShards';
 import DropTargetItem from './DropTargetItem';
@@ -20,30 +21,36 @@ class LayoutDesk extends React.Component {
     };
 
     render() {
-        const { shardsList } = this.props.layout;
+        const { layout: { shardsList }, narrowViewOnly } = this.props;
 
         return (
-            <div className="layout-desk">
-                {
-                    shardsList
-                        .reduce((acc, value) => [...acc, value, 'add-bar'], ['add-bar'])
-                        .map((componentId, index) => {
-                            if (componentId === 'add-bar') {
-                                return (
-                                    <Fragment key={generateId()}>
-                                        {this.getDropTargetItem(null, index / 2)}
-                                    </Fragment>
-                                );
-                            }
-
-                            const LayoutShard = LayoutShards[componentId];
-
+            <div className={classNames('layout-desk', { 'narrow-view': narrowViewOnly })}>
+                {!narrowViewOnly && shardsList
+                    .reduce((acc, value) => [...acc, value, 'add-bar'], ['add-bar'])
+                    .map((componentId, index) => {
+                        if (componentId === 'add-bar') {
                             return (
-                                <Fragment key={index}>
-                                    {this.getDropTargetItem(<LayoutShard />, index)}
+                                <Fragment key={generateId()}>
+                                    {this.getDropTargetItem(null, index / 2)}
                                 </Fragment>
                             );
-                        })
+                        }
+
+                        const LayoutShard = LayoutShards[componentId];
+
+                        return (
+                            <Fragment key={index}>
+                                {this.getDropTargetItem(<LayoutShard />, index)}
+                            </Fragment>
+                        );
+                    })
+                }
+                {
+                    narrowViewOnly && shardsList.map((componentId, index) => {
+                        const LayoutShard = LayoutShards[componentId];
+
+                        return (<LayoutShard key={index} />);
+                    })
                 }
             </div>
         );
@@ -55,11 +62,13 @@ LayoutDesk.propTypes = {
         id: PropTypes.string,
         shardsList: PropTypes.array,
     }),
-    updateLayout: PropTypes.func.isRequired,
+    updateLayout: PropTypes.func,
+    narrowViewOnly: PropTypes.bool,
 };
 
 LayoutDesk.defaultProps = {
     layout: { shardsList: [] },
+    narrowViewOnly: false,
 };
 
 export default LayoutDesk;

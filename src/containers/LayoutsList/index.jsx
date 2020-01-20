@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import AddSharp from '@material-ui/icons/AddSharp';
 
+import LayoutDesk from '../../components/LayoutDesk';
+
 import './styles.scss';
 
 class LayoutsList extends React.Component {
@@ -22,10 +24,10 @@ class LayoutsList extends React.Component {
                         <AddSharp className="add-icon" />
                     </div>
                     {
-                        layouts.map(({ id, shardsList }) => {
+                        layouts.map((layout) => {
                             return (
-                                <div key={id} className="layout" onClick={this.handleLayoutClick(id)}>
-                                    {id}
+                                <div key={layout.id} className="layout" onClick={this.handleLayoutClick(layout.id)}>
+                                    <LayoutDesk layout={layout} narrowViewOnly />
                                 </div>
                             );
                         })
