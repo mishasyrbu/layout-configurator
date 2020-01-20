@@ -1,19 +1,12 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 import LayoutShards from '../../components/LayoutShards';
 import DropTargetItem from './DropTargetItem';
 import { generateId } from '../../utils';
 import './styles.scss';
 
-export default class LayoutDesk extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            shardsList: [' '],
-        };
-    }
-
+class LayoutDesk extends React.Component {
     getDropTargetItem = (children, index) => (
         <DropTargetItem id={generateId()} onDropEvent={this.handleDropEvent(index)}>
             {children}
@@ -21,28 +14,24 @@ export default class LayoutDesk extends React.Component {
     );
 
     handleDropEvent = (index) => (componentId) => {
-        console.log('handleDropEvent', componentId);
-        
-        this.setState(({ shardsList }) => {
-            const addElements = shardsList[index] === ' ' ? [' ', componentId, ' '] : [componentId];
-            return { shardsList: [...shardsList.slice(0, index), ...addElements, ...shardsList.slice(index + 1)] };
-        });
+        const { id, shardsList } = this.props.layout;
+
+        this.props.updateLayout(id, [...shardsList.slice(0, index), componentId, ...shardsList.slice(index)]);
     };
 
     render() {
-        const { shardsList } = this.state;
-        console.log(shardsList);
-        
+        const { shardsList } = this.props.layout;
 
         return (
             <div className="layout-desk">
                 {
                     shardsList
+                        .reduce((acc, value) => [...acc, value, 'add-bar'], ['add-bar'])
                         .map((componentId, index) => {
-                            if (componentId === ' ') {
+                            if (componentId === 'add-bar') {
                                 return (
                                     <Fragment key={generateId()}>
-                                        {this.getDropTargetItem(null, index)}
+                                        {this.getDropTargetItem(null, index / 2)}
                                     </Fragment>
                                 );
                             }
@@ -60,3 +49,17 @@ export default class LayoutDesk extends React.Component {
         );
     }
 }
+
+LayoutDesk.propTypes = {
+    layout: PropTypes.shape({
+        id: PropTypes.string,
+        shardsList: PropTypes.array,
+    }),
+    updateLayout: PropTypes.func.isRequired,
+};
+
+LayoutDesk.defaultProps = {
+    layout: { shardsList: [] },
+};
+
+export default LayoutDesk;

@@ -1,17 +1,37 @@
 import React from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import { DnD } from '../../hocs';
 import LeftMenu from '../../components/LeftMenu';
 import LayoutDesk from '../../components/LayoutDesk';
 import LayoutShards from '../../components/LayoutShards';
+import { generateId } from '../../utils';
+import { Actions } from '../../constants';
 import './styles.scss';
 
 const { dragSource } = DnD;
 
 class LayoutEditor extends React.Component {
+    handleUpdateLayout = (id, shardsList) => this.props.updateLayout(id, shardsList);
+
+    componentDidMount() {
+        const { layout } = this.props;
+        const { layoutId } = this.props.match.params;
+
+        if (layoutId === 'new' || !layout) {
+            const newId = generateId();
+
+            this.props.createLayout(newId);
+            this.props.history.replace(`/edit/${newId}`);
+        }
+    }
 
     render() {
-       return (
+        const { layout } = this.props;
+        
+        return (
             <div className="layout-editor">
                 <LeftMenu title="Components">
                     <ul className="components-list">
@@ -30,11 +50,29 @@ class LayoutEditor extends React.Component {
                 </LeftMenu>
                 <section className="container">
                     <div className="title">{"Configuration Screen"}</div>
-                    <LayoutDesk />
+                    <LayoutDesk layout={layout} updateLayout={this.handleUpdateLayout} />
                 </section>
             </div>
         );
     }
 }
 
-export default LayoutEditor;
+const mapStateToProps = (state, ownProps) => {
+    const { layoutId } = ownProps.match.params;
+
+    return {
+        layout: state.layoutsList.layouts.find(({ id }) => id === layoutId),
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        createLayout: (id) => dispatch({ type: Actions.CREATE_LAYOUT, payload: { id } }),
+        updateLayout: (id, shardsList) => dispatch({ type: Actions.UPDATE_LAYOUT, payload: { id, shardsList } }),
+    }
+};
+
+export default compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps),
+)(LayoutEditor);
