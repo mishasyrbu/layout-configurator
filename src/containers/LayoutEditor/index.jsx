@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -56,6 +57,15 @@ class LayoutEditor extends React.Component {
         );
     }
 }
+
+LayoutEditor.propTypes = {
+    layout: PropTypes.shape({
+        id: PropTypes.string,
+        shardsList: PropTypes.arrayOf(PropTypes.string),
+    }),
+    createLayout: PropTypes.func.isRequired,
+    updateLayout: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state, ownProps) => {
     const { layoutId } = ownProps.match.params;

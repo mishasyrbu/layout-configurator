@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -37,6 +38,13 @@ class LayoutsList extends React.Component {
         );
     }
 }
+
+LayoutsList.propTypes = {
+    layouts: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string,
+        shardsList: PropTypes.arrayOf(PropTypes.string),
+    }))
+};
 
 const mapStateToProps = (state) => {
     return {

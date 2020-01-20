@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import './styles.scss';
 
 const LeftMenu = ({ title, children }) => {
@@ -8,6 +10,11 @@ const LeftMenu = ({ title, children }) => {
             <div className="content">{children}</div>
         </aside>
     );
+};
+
+LeftMenu.propTypes = {
+    title: PropTypes.string.isRequired,
+    children: PropTypes.node,
 };
 
 export default LeftMenu;
