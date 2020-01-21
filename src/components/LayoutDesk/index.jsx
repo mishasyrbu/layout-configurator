@@ -20,6 +20,13 @@ class LayoutDesk extends React.Component {
         this.props.updateLayout(id, [...shardsList.slice(0, index), componentId, ...shardsList.slice(index)]);
     };
 
+    handleRemoveClick = (index) => () => {
+        const { id, shardsList } = this.props.layout;
+        const removeIndex = Math.floor(index / 2);
+        
+        this.props.updateLayout(id, shardsList.filter((s, i) => i !== removeIndex));
+    };
+
     render() {
         const { layout: { shardsList }, narrowViewOnly } = this.props;
 
@@ -31,7 +38,7 @@ class LayoutDesk extends React.Component {
                         if (componentId === 'add-bar') {
                             return (
                                 <Fragment key={generateId()}>
-                                    {this.getDropTargetItem(null, index / 2)}
+                                    {this.getDropTargetItem(null, Math.floor(index / 2))}
                                 </Fragment>
                             );
                         }
@@ -39,9 +46,10 @@ class LayoutDesk extends React.Component {
                         const LayoutShard = LayoutShards[componentId];
 
                         return (
-                            <Fragment key={index}>
-                                {this.getDropTargetItem(<LayoutShard />, index)}
-                            </Fragment>
+                            <div key={index} className="layout-shard" onClick={this.handleRemoveClick(index)}>
+                                <div className="shard-overlay" />
+                                <LayoutShard />
+                            </div>
                         );
                     })
                 }
