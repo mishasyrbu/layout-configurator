@@ -4,7 +4,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import AddSharp from '@material-ui/icons/AddSharp';
+import DeleteIcon from '@material-ui/icons/Delete';
 
+import { Actions } from '../../constants';
 import LayoutDesk from '../../components/LayoutDesk';
 
 import './styles.scss';
@@ -12,6 +14,11 @@ import './styles.scss';
 class LayoutsList extends React.Component {
     handleLayoutClick = (id) => () => {
         this.props.history.push(`/edit/${id}`);
+    };
+
+    handleDeleteButton = (id) => (event) => {
+        event.stopPropagation();
+        this.props.removeLayout(id);
     };
 
     render() {
@@ -28,6 +35,9 @@ class LayoutsList extends React.Component {
                         layouts.map((layout) => {
                             return (
                                 <div key={layout.id} className="layout" onClick={this.handleLayoutClick(layout.id)}>
+                                    <div className="delete-button" onClick={this.handleDeleteButton(layout.id)}>
+                                        <DeleteIcon />
+                                    </div>
                                     <LayoutDesk layout={layout} narrowViewOnly />
                                 </div>
                             );
@@ -53,7 +63,9 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = dispatch => {
-    return {}
+    return {
+        removeLayout: (id) => dispatch({ type: Actions.REMOVE_LAYOUT, payload: { id } }),
+    }
 };
 
 export default compose(

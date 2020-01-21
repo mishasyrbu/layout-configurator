@@ -31,6 +31,12 @@ export default function(state = initialState, action) {
             return { ...state, layouts };
         }
 
+        case Actions.REMOVE_LAYOUT: {
+            const layouts = state.layouts.filter(({ id }) => id !== payload.id);
+
+            return { ...state, layouts };
+        }
+
         default:
             return state;
     }

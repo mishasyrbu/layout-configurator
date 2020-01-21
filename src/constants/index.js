@@ -1,4 +1,5 @@
 export const Actions = {
     CREATE_LAYOUT: 'CREATE_LAYOUT',
     UPDATE_LAYOUT: 'UPDATE_LAYOUT',
+    REMOVE_LAYOUT: 'REMOVE_LAYOUT',
 };
