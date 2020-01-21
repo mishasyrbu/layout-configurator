@@ -28,7 +28,7 @@ class LayoutsList extends React.Component {
             <div className="layouts-list">
                 <div className="title">{"Layouts Screen"}</div>
                 <div className="content">
-                    <div className="layout" onClick={this.handleLayoutClick('new')}>
+                    <div className="layout add-item" onClick={this.handleLayoutClick('new')}>
                         <AddSharp className="add-icon" />
                     </div>
                     {
