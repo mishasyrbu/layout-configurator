@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/layout-configurator/static/css/main.8106d0e1.chunk.css",
+    "main.css": "/layout-configurator/static/css/main.201eb1ec.chunk.css",
     "main.js": "/layout-configurator/static/js/main.dad7896c.chunk.js",
     "main.js.map": "/layout-configurator/static/js/main.dad7896c.chunk.js.map",
     "runtime-main.js": "/layout-configurator/static/js/runtime-main.ff851464.js",
@@ -8,15 +8,15 @@
     "static/js/2.914cb3fb.chunk.js": "/layout-configurator/static/js/2.914cb3fb.chunk.js",
     "static/js/2.914cb3fb.chunk.js.map": "/layout-configurator/static/js/2.914cb3fb.chunk.js.map",
     "index.html": "/layout-configurator/index.html",
-    "precache-manifest.61fd66a621d6f80a1685292ccca85267.js": "/layout-configurator/precache-manifest.61fd66a621d6f80a1685292ccca85267.js",
+    "precache-manifest.e0ff96c8a839c1c41976785e4b9ca388.js": "/layout-configurator/precache-manifest.e0ff96c8a839c1c41976785e4b9ca388.js",
     "service-worker.js": "/layout-configurator/service-worker.js",
-    "static/css/main.8106d0e1.chunk.css.map": "/layout-configurator/static/css/main.8106d0e1.chunk.css.map",
+    "static/css/main.201eb1ec.chunk.css.map": "/layout-configurator/static/css/main.201eb1ec.chunk.css.map",
     "static/js/2.914cb3fb.chunk.js.LICENSE": "/layout-configurator/static/js/2.914cb3fb.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.ff851464.js",
     "static/js/2.914cb3fb.chunk.js",
-    "static/css/main.8106d0e1.chunk.css",
+    "static/css/main.201eb1ec.chunk.css",
     "static/js/main.dad7896c.chunk.js"
   ]
 }
